@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <springProfile name="local">
+        <include resource="org/springframework/boot/logging/logback/base.xml"/>
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+
+
+    <springProfile name="test">
+        <include resource="org/springframework/boot/logging/logback/base.xml"/>
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+
+
+    <springProfile name="live">
+        <include resource="discord.xml"/>
+
+        <!-- 공통 패턴 정의 -->
+        <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"/>
+
+        <!-- 로그가 쌓일 장소 -->
+        <property name="BATCH_LOG_FILE" value="batch.log"/>
+        <property name="API_LOG_FILE" value="api.log"/>
+        <property name="DOMAIN_LOG_FILE" value="domain.log"/>
+
+
+        <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+            <destination>${LOGSTASH_HOST}:${LOGSTASH_PORT}</destination>
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+        </appender>
+
+
+        <!-- 콘솔 출력을 위한 appender -->
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>${LOG_PATTERN}</pattern>
+            </encoder>
+        </appender>
+
+        <!-- 파일 출력을 위한 appender -->
+        <appender name="API" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${API_LOG_FILE}</file>
+            <encoder>
+                <pattern>${LOG_PATTERN}</pattern>
+            </encoder>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <!-- 일별로 로그 파일 생성 -->
+                <fileNamePattern>logs/api.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+                <!-- 30일간 보관 -->
+                <maxHistory>30</maxHistory>
+            </rollingPolicy>
+        </appender>
+
+
+        <!-- 파일 출력을 위한 appender -->
+        <appender name="BATCH" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <!-- 로그 저장위치 -->
+            <file>${BATCH_LOG_FILE}</file>
+            <encoder>
+                <pattern>${LOG_PATTERN}</pattern>
+            </encoder>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <!-- 일별로 로그 파일 생성 -->
+                <fileNamePattern>logs/batch.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+                <!-- 30일간 보관 -->
+                <maxHistory>30</maxHistory>
+            </rollingPolicy>
+        </appender>
+
+        <!-- 파일 출력을 위한 appender -->
+        <appender name="DOMAIN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${DOMAIN_LOG_FILE}</file>
+            <encoder>
+                <pattern>${LOG_PATTERN}</pattern>
+            </encoder>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <!-- 일별로 로그 파일 생성 -->
+                <fileNamePattern>logs/domain.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+                <!-- 30일간 보관 -->
+                <maxHistory>30</maxHistory>
+            </rollingPolicy>
+        </appender>
+
+        <!-- core-api 모듈의 로그 설정 -->
+        <logger name="snoopy.didit.api" level="INFO" additivity="false">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="API"/>
+            <appender-ref ref="LOGSTASH"/>
+            <appender-ref ref="DISCORD_API"/>
+        </logger>
+
+        <!-- domain 모듈의 로그 설정 -->
+        <logger name="snoopy.didit.domain" level="INFO" additivity="false">
+            <appender-ref ref="DOMAIN"/>
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="LOGSTASH"/>
+            <appender-ref ref="DISCORD_DOMAIN"/>
+        </logger>
+
+        <!-- batch 모듈의 로그 설정 -->
+        <logger name="snoopy.didit.batch" level="WARN" additivity="false">
+            <appender-ref ref="BATCH"/>
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="LOGSTASH"/>
+            <appender-ref ref="DISCORD_BATCH"/>
+        </logger>
+
+        <!-- Root 로거 설정 -->
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+
+    </springProfile>
+
+</configuration>

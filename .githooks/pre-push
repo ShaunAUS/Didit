@@ -1,0 +1,44 @@
+#!/bin/sh
+echo "🔍 코드 스타일 검사 중..."
+./gradlew ktlintCheck --daemon
+status=$?
+if [ "$status" = 0 ] ; then
+    echo "✅ 코드 스타일 검사가 통과되었습니다"
+else
+    echo "⚠️ 코드 스타일 이슈가 발견되었습니다. 자동 수정을 시작합니다..."
+    ./gradlew ktlintFormat --daemon
+    # 포맷팅 후 다시 한번 체크
+    ./gradlew ktlintCheck --daemon
+    final_status=$?
+    if [ "$final_status" = 0 ] ; then
+        echo "🔄 코드 스타일이 자동으로 수정되었습니다. 변경사항을 확인하고 다시 커밋해주세요."
+        exit 1
+    else
+        echo "❌ 자동 수정 후에도 해결되지 않은 스타일 이슈가 있습니다. 수동으로 수정해주세요."
+        exit 1
+    fi
+fi
+
+# 테스트 실행 코드
+echo "🚀 테스트 실행 중..."
+# Gradle 테스트 실행
+./gradlew test --parallel --continue
+test_status=$?
+if [ "$test_status" = 0 ] ; then
+    echo "✅ 모든 테스트가 성공적으로 통과되었습니다"
+else
+    echo "❌ 테스트 실패! 실패한 테스트를 수정한 후 다시 시도해주세요"
+    exit 1
+fi
+
+# JAR 빌드
+echo "📦 JAR 파일 빌드 중..."
+./gradlew bootJar
+jar_status=$?
+if [ "$jar_status" = 0 ] ; then
+    echo "✅ JAR 파일이 성공적으로 빌드되었습니다"
+    exit 0
+else
+    echo "❌ JAR 빌드 실패! 빌드 오류를 확인해주세요"
+    exit 1
+fi

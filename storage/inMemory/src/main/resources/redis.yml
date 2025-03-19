@@ -1,0 +1,26 @@
+---
+spring.config.activate.on-profile: local
+
+spring:
+  redis:
+    host: localhost
+    port: 6379
+    password: 12341234
+
+---
+spring.config.activate.on-profile: live
+
+spring:
+  redis:
+    host: ${redis-host}
+    port: ${redis-port}
+    password: ${redis-pwd}
+
+---
+spring.config.activate.on-profile: test
+
+spring:
+  redis:
+    host: localhost
+    port: 6379
+    password: 12341234

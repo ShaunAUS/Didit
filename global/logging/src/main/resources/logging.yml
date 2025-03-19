@@ -1,0 +1,11 @@
+# 상위 모듈에서 profile이 Live 일때 동작함
+logging:
+  level:
+    root: INFO
+    snoopy.didit.api: INFO
+    snoopy.didit.mail: WARN
+    snoopy.didit.domain: INFO
+
+logstash:
+  host: ${LOGSTASH_HOST}
+  port: ${LOGSTASH_PORT}

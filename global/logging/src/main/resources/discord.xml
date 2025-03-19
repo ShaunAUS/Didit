@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+    <springProperty scope="context" name="DISCORD_PATTERN" source="discord.pattern"/>
+    <springProperty scope="context" name="DISCORD_API_WEBHOOK" source="discord.webhooks.api"/>
+    <springProperty scope="context" name="DISCORD_DOMAIN_WEBHOOK" source="discord.webhooks.domain"/>
+    <springProperty scope="context" name="DISCORD_BATCH_WEBHOOK" source="discord.webhooks.batch"/>
+    <!-- API 모듈용 Discord Appender -->
+    <appender name="DISCORD_API" class="com.github.napstr.logback.DiscordAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <webhookUri>${DISCORD_API_WEBHOOK}</webhookUri>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${DISCORD_PATTERN}</pattern>
+        </layout>
+        <username>[API 에러알림]</username>
+        <tts>false</tts>
+    </appender>
+
+    <!-- Domain 모듈용 Discord Appender -->
+    <appender name="DISCORD_DOMAIN" class="com.github.napstr.logback.DiscordAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <webhookUri>${DISCORD_DOMAIN_WEBHOOK}</webhookUri>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${DISCORD_PATTERN}</pattern>
+        </layout>
+        <username>[Domain 에러알림]</username>
+        <tts>false</tts>
+    </appender>
+
+    <!-- Batch 모듈용 Discord Appender -->
+    <appender name="DISCORD_BATCH" class="com.github.napstr.logback.DiscordAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <webhookUri>${DISCORD_BATCH_WEBHOOK}</webhookUri>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${DISCORD_PATTERN}</pattern>
+        </layout>
+        <username>[Batch 에러알림]</username>
+        <tts>false</tts>
+    </appender>
+</included>

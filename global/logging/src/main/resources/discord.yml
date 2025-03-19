@@ -1,0 +1,12 @@
+discord:
+  pattern: |
+    **TIME:** %d{yyyy-MM-dd HH:mm:ss}
+    **LEVEL:** %-5level
+    **IP:** %X{request_ip}
+    **REQUEST_ID:** %X{request_id}
+    **URL:** %X{request_url}
+    **MESSAGE:** %msg
+  webhooks:
+    api: ${discord-api-webhook}
+    domain: ${discord-domain-webhook}
+    batch: ${discord-batch-webhook}

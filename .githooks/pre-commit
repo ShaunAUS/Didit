@@ -1,0 +1,38 @@
+#!/bin/sh
+echo "Ktlint Formatting 검사 중..."
+./gradlew ktlintCheck --daemon
+status=$?
+
+if [ "$status" = 0 ] ; then
+    echo "✅ 코드 포맷팅 검사가 완료되었습니다"
+else
+    echo "❌ 포맷팅 이슈가 발견되었습니다. 자동 포맷팅을 시작합니다..."
+    ./gradlew ktlintFormat --daemon
+
+    # 포맷팅 후 다시 한번 체크
+    ./gradlew ktlintCheck --daemon
+    final_status=$?
+
+    if [ "$final_status" = 0 ] ; then
+        echo "✅ 파일들이 포맷팅되었습니다. 변경사항을 확인하고 커밋해주세요."
+        exit 1
+    else
+        echo "❌ 자동 포맷팅 후에도 해결되지 않은 이슈가 있습니다. 수동으로 수정해주세요."
+        exit 1
+    fi
+fi
+
+# 테스트 실행 코드
+echo "테스트 실행 중..."
+
+# Gradle 테스트 실행
+./gradlew test --parallel --continue
+test_status=$?
+
+if [ "$test_status" = 0 ] ; then
+    echo "✅ 테스트가 성공적으로 완료되었습니다"
+    exit 0
+else
+    echo "❌ 테스트 실패! 테스트를 수정 후 다시 시도해주세요"
+    exit 1
+fi

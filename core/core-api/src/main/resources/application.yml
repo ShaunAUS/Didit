@@ -1,0 +1,112 @@
+spring:
+  application:
+    name: didit
+  profiles:
+    active: local
+  config:
+    import:
+      - db.yml
+      - redis.yml
+      - batch.yml
+      - mail.yml
+      - logging.yml
+      - monitoring.yml
+      - discord.yml
+  web:
+    resources:
+      add-mappings: false
+
+
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: always
+    include-exception: false
+
+jwt:
+  secret: c3ByaW5nLWJvb3Qtc2VjdXJpdHktand0LXR1dG9yaWFsLWppd29vbi1zcHJpbmctYm9vdC1zZWN1cml0eS1qd3QtdHV0b3JpYWw
+  refresh-expire-time: 86400
+  access-expire-time: 3600
+
+oauth2:
+  google:
+    client-id:
+    client-secret:
+    redirect-uri: http://localhost:8080/login/oauth2/code/google
+    token-uri: https://oauth2.googleapis.com/token
+    resource-uri: https://www.googleapis.com/oauth2/v2/userinfo
+
+---
+spring:
+  application:
+    name: didit
+  profiles:
+    active: live
+  config:
+    import:
+      - db.yml
+      - redis.yml
+      - batch.yml
+      - mail.yml
+      - logging.yml
+      - monitoring.yml
+      - discord.yml
+  web:
+    resources:
+      add-mappings: false
+
+
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: always
+    include-exception: false
+
+jwt:
+  secret: ${jwt-secret}
+  refresh-expire-time: 86400
+  access-expire-time: 3600
+
+oauth2:
+  google:
+    client-id: ${google-client-id}
+    client-secret: ${google-client-secret}
+    redirect-uri: ${google-redirect-uri}
+    token-uri: ${google-token-uri}
+    resource-uri: ${google-resource-uri}
+
+---
+spring:
+  application:
+    name: didit
+  profiles:
+    active: test
+  config:
+    import:
+      - db.yml
+      - redis.yml
+  web:
+    resources:
+      add-mappings: false
+
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: always
+    include-exception: false
+
+jwt:
+  secret: c3ByaW5nLWJvb3Qtc2VjdXJpdHktand0LXR1dG9yaWFsLWppd29vbi1zcHJpbmctYm9vdC1zZWN1cml0eS1qd3QtdHV0b3JpYWw
+  refresh-expire-time: 86400
+  access-expire-time: 3600
+
+oauth2:
+  google:
+    client-id:
+    client-secret:
+    redirect-uri: http://localhost:8080/login/oauth2/code/google
+    token-uri: https://oauth2.googleapis.com/token
+    resource-uri: https://www.googleapis.com/oauth2/v2/userinfo

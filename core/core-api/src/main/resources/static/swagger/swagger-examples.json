@@ -1,0 +1,385 @@
+{
+    "space.success.response": {
+        "result": "SUCCESS",
+        "data": {
+            "id": 1,
+            "name": "회의실"
+        },
+        "error": null
+    },
+    "space.valid.error.response": {
+        "result": "ERROR",
+        "data": null,
+        "error": {
+            "code": "V001",
+            "message": "Invalid Input Value",
+            "data": "제목은 필수 입력값입니다"
+        }
+    },
+    "space.list.success.response": {
+        "result": "SUCCESS",
+        "data": [
+            {
+                "id": 1,
+                "name": "회의실"
+            },
+            {
+                "id": 2,
+                "name": "휴게실"
+            }
+        ],
+        "error": null
+    },
+    "space.empty.success.response": {
+        "result": "SUCCESS",
+        "data": [],
+        "error": null
+    },
+    "space.not.found.error.response": {
+        "result": "ERROR",
+        "data": null,
+        "error": {
+            "code": "S001",
+            "message": "Not Found Space",
+            "data": "null"
+        }
+    },
+    "alarm.success.response": {
+        "result": "SUCCESS",
+        "data": {
+            "time": "12:20:00",
+            "day": [
+                "MONDAY",
+                "WEDNESDAY",
+                "FRIDAY"
+            ],
+            "isAlarmEnable": true
+        },
+        "error": null
+    },
+    "alarm.valid.error.response": {
+        "result": "ERROR",
+        "data": null,
+        "error": {
+            "code": "V001",
+            "message": "Invalid Input Value",
+            "data": "알람 시간은 필수 입력값입니다"
+        }
+    },
+    "alarm.not.found.error.response": {
+        "result": "ERROR",
+        "data": null,
+        "error": {
+            "code": "A001",
+            "message": "Not Found Alarm",
+            "data": "null"
+        }
+    },
+    "alarm.enable.success.response": {
+        "result": "ERROR",
+        "data": null,
+        "error": {
+            "code": "A001",
+            "message": null,
+            "data": null
+        }
+    },
+    "memoirTag.success.response": {
+        "result": "SUCCESS",
+        "data": {
+            "id": 4,
+            "writeDate": "2025-01-22T17:27:04.068559",
+            "title": "회고록입니다88",
+            "content": "회고록 내용내용88",
+            "tags": [
+                {
+                    "name": "tag14"
+                }
+            ]
+        },
+        "error": null
+    },
+    "memoirTag.list.success.response": {
+        "result": "SUCCESS",
+        "data": [
+            {
+                "id": 1,
+                "title": "오늘의 회고",
+                "content": "오늘 있었던 일에 대한 회고",
+                "tags": [
+                    "회사",
+                    "업무",
+                    "성장"
+                ]
+            },
+            {
+                "id": 2,
+                "title": "주간 회고",
+                "content": "이번 주 있었던 일에 대한 회고",
+                "tags": [
+                    "주간",
+                    "성장"
+                ]
+            }
+        ],
+        "error": null
+    },
+    "memoir.delete.success.response": {
+        "result": "SUCCESS",
+        "data": {
+            "id": 2,
+            "writeDate": "2025-01-22T13:29:53",
+            "title": "회고록입니다999",
+            "content": "회고록 내용내용999"
+        },
+        "error": null
+    },
+    "memoirTag.valid.error.response": {
+        "result": "ERROR",
+        "data": null,
+        "error": {
+            "code": "V001",
+            "message": "Invalid Input Value",
+            "data": "제목은 필수 입력값입니다"
+        }
+    },
+    "memoirTag.not.found.error.response": {
+        "result": "ERROR",
+        "data": null,
+        "error": {
+            "code": "M001",
+            "message": "Not Found Memoir",
+            "data": null
+        }
+    },
+    "member.memoirTag.list.success.response": {
+        "result": "SUCCESS",
+        "data": [
+            {
+                "spaceName": "test",
+                "memoirTagResponses": [
+                    {
+                        "id": 5,
+                        "writeDate": "2025-01-22T17:28:58",
+                        "title": "회고록입니다88",
+                        "content": "회고록 내용내용88",
+                        "tags": [
+                            {
+                                "name": "tag14"
+                            }
+                        ]
+                    },
+                    {
+                        "id": 4,
+                        "writeDate": "2025-01-22T17:27:04",
+                        "title": "회고록입니다88",
+                        "content": "회고록 내용내용88",
+                        "tags": [
+                            {
+                                "name": "tag14"
+                            }
+                        ]
+                    },
+                    {
+                        "id": 3,
+                        "writeDate": "2025-01-22T13:36:41",
+                        "title": "회고록입니다88",
+                        "content": "회고록 내용내용88",
+                        "tags": [
+                            {
+                                "name": "tag14"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "error": null
+    },
+    "member.memoirTag.empty.success.response": {
+        "result": "SUCCESS",
+        "data": [],
+        "error": null
+    },
+    "member.memoirTag.date.success.response": {
+        "result": "SUCCESS",
+        "data": [
+            {
+                "month": 1,
+                "weekNumber": 1,
+                "startDay": 1,
+                "endDay": 5,
+                "memoirTagResponses": []
+            },
+            {
+                "month": 1,
+                "weekNumber": 1,
+                "startDay": 6,
+                "endDay": 12,
+                "memoirTagResponses": []
+            },
+            {
+                "month": 1,
+                "weekNumber": 1,
+                "startDay": 13,
+                "endDay": 19,
+                "memoirTagResponses": []
+            },
+            {
+                "month": 1,
+                "weekNumber": 1,
+                "startDay": 20,
+                "endDay": 26,
+                "memoirTagResponses": [
+                    {
+                        "id": 3,
+                        "writeDate": "2025-01-22T13:36:41",
+                        "title": "회고록입니다88",
+                        "content": "회고록 내용내용88",
+                        "tags": [
+                            {
+                                "name": "tag14"
+                            }
+                        ]
+                    },
+                    {
+                        "id": 4,
+                        "writeDate": "2025-01-22T17:27:04",
+                        "title": "회고록입니다88",
+                        "content": "회고록 내용내용88",
+                        "tags": [
+                            {
+                                "name": "tag14"
+                            }
+                        ]
+                    },
+                    {
+                        "id": 5,
+                        "writeDate": "2025-01-22T17:28:58",
+                        "title": "회고록입니다88",
+                        "content": "회고록 내용내용88",
+                        "tags": [
+                            {
+                                "name": "tag14"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "month": 1,
+                "weekNumber": 1,
+                "startDay": 27,
+                "endDay": 31,
+                "memoirTagResponses": []
+            }
+        ],
+        "error": null
+    },
+    "member.memoirTag.date.empty.success.response": {
+        "result": "SUCCESS",
+        "data": [
+            {
+                "month": 1,
+                "weekNumber": 1,
+                "startDay": 1,
+                "endDay": 5,
+                "memoirTagResponses": []
+            },
+            {
+                "month": 1,
+                "weekNumber": 1,
+                "startDay": 6,
+                "endDay": 12,
+                "memoirTagResponses": []
+            },
+            {
+                "month": 1,
+                "weekNumber": 1,
+                "startDay": 13,
+                "endDay": 19,
+                "memoirTagResponses": []
+            },
+            {
+                "month": 1,
+                "weekNumber": 1,
+                "startDay": 20,
+                "endDay": 26,
+                "memoirTagResponses": []
+            },
+            {
+                "month": 1,
+                "weekNumber": 1,
+                "startDay": 27,
+                "endDay": 31,
+                "memoirTagResponses": []
+            }
+        ],
+        "error": null
+    },
+    "member.memoirTag.continous.writing.success.response": {
+        "result": "SUCCESS",
+        "data": {
+            "continuousWriteDay": 1,
+            "writtenDates": [
+                "2025-01-22"
+            ],
+            "totalMemoirCount": 1,
+            "randomMessage": "새로운 습관을 만드는 중입니다. 한 걸음 한 걸음 앞으로 나아가고 있어요."
+        },
+        "error": null
+    },
+
+    "member.memoirTag.continous.writing.error.response": {
+        "result": "SUCCESS",
+        "data": {
+            "continuousWriteDay": 1,
+            "writtenDates": [],
+            "totalMemoirCount": 0,
+            "randomMessage": "오늘도 스스로를 위한 선택을 해주셔서 감사합니다. 당신은 충분히 잘하고 있어요."
+        },
+        "error": null
+    },
+    "signUp.success.response": {
+        "result": "SUCCESS",
+        "data": [],
+        "error": null
+    },
+    "signUp.email.verification.success.response": {
+        "result": "SUCCESS",
+        "data": [],
+        "error": null
+    },
+    "signUp.email.verify.code.success.response": {
+        "result": "SUCCESS",
+        "data": [],
+        "error": null
+    },
+    "signUp.error.response": {
+        "result": "ERROR",
+        "data": null,
+        "error": {
+            "code": "V001",
+            "message": "Invalid Input Value",
+            "data": "이름은 필수 입력값입니다"
+        }
+    },
+    "space.email.verification.error.response": {
+        "result": "ERROR",
+        "data": null,
+        "error": {
+            "code": "MB001",
+            "message": "Email Already Exists",
+            "data": null
+        }
+    },
+    "signUp.email.verify.code.error.response": {
+        "result": "ERROR",
+        "data": null,
+        "error": {
+            "code": "V002",
+            "message": "Invalid Verify Code",
+            "data": null
+        }
+    }
+}
